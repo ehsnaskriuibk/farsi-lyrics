@@ -32,22 +32,22 @@
       }
 
       :root {
-        --bg: #07070c;
-        --surface: #0e0e16;
-        --surface-2: #13131d;
-        --border: #1a1a28;
-        --gold: #c8913a;
-        --gold-dim: #6e4f1f;
-        --gold-glow: rgba(200, 145, 58, 0.1);
-        --blue: #4896c8;
-        --text: #ece8e1;
-        --muted: #5e5e72;
-        --muted-2: #8a8a9a;
+        --bg: #fbfcfd;
+        --surface: #ffffff;
+        --surface-2: #f3f8fa;
+        --border: #d8e5ea;
+        --gold: #fe5e56;
+        --gold-dim: #03658c;
+        --gold-glow: rgba(217, 81, 74, 0.11);
+        --blue: #3f88a4;
+        --text: #12212a;
+        --muted: #6f818b;
+        --muted-2: #4f6672;
         --display: "Playfair Display", Georgia, serif;
         --body: "DM Sans", Arial, sans-serif;
         --persian: "Vazirmatn", Tahoma, sans-serif;
-        --plyr-color-main: #c8913a;
-        --plyr-video-background: #0e0e16;
+        --plyr-color-main: #fe5e56;
+        --plyr-video-background: #03658c;
         --plyr-font-family: "DM Sans", sans-serif;
         --plyr-control-radius: 2px;
       }
@@ -71,7 +71,7 @@
         inset: 0;
         z-index: 900;
         pointer-events: none;
-        opacity: 0.22;
+        opacity: 0.12;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
       }
 
@@ -109,7 +109,7 @@
         width: 30px;
         height: 30px;
         z-index: 9998;
-        border: 1px solid rgba(200, 145, 58, 0.35);
+        border: 1px solid rgba(3, 101, 140, 0.35);
         transition: width 0.3s, height 0.3s, border-color 0.3s;
       }
 
@@ -148,7 +148,7 @@
       }
 
       nav#nav.scrolled {
-        background: rgba(7, 7, 12, 0.9);
+        background: rgba(255, 255, 255, 0.86);
         border-bottom: 1px solid var(--border);
         backdrop-filter: blur(16px);
       }
@@ -225,7 +225,7 @@
         height: 700px;
         top: -200px;
         left: -200px;
-        background: radial-gradient(circle, #c8913a, transparent 65%);
+        background: radial-gradient(circle, #fe5e56, transparent 65%);
       }
 
       .orb-2 {
@@ -233,7 +233,7 @@
         height: 550px;
         right: -100px;
         bottom: -100px;
-        background: radial-gradient(circle, #4896c8, transparent 65%);
+        background: radial-gradient(circle, #3f88a4, transparent 65%);
         animation-delay: -8s;
       }
 
@@ -243,7 +243,7 @@
         top: 35%;
         left: 52%;
         opacity: 0.09;
-        background: radial-gradient(circle, #7a3278, transparent 65%);
+        background: radial-gradient(circle, #d9514a, transparent 65%);
         animation-delay: -16s;
       }
 
@@ -252,7 +252,7 @@
         height: 96px;
         object-fit: contain;
         margin: 0 auto 1.8rem;
-        filter: drop-shadow(0 0 24px rgba(200, 145, 58, 0.25));
+        filter: drop-shadow(0 0 24px rgba(3, 101, 140, 0.18));
         animation: fadeUp 1s ease 0.1s both;
       }
 
@@ -483,8 +483,8 @@
         position: absolute;
         inset: 0;
         background:
-          radial-gradient(circle at 50% 45%, rgba(200, 145, 58, 0.16), transparent 28%),
-          linear-gradient(180deg, rgba(7, 7, 12, 0.08), rgba(7, 7, 12, 0.7));
+          radial-gradient(circle at 50% 45%, rgba(63, 136, 164, 0.2), transparent 28%),
+          linear-gradient(180deg, rgba(18, 33, 42, 0.04), rgba(18, 33, 42, 0.6));
       }
 
       .video-poster span {
@@ -493,9 +493,9 @@
         bottom: 1.35rem;
         z-index: 1;
         transform: translateX(-50%);
-        border: 1px solid rgba(200, 145, 58, 0.55);
+        border: 1px solid rgba(3, 101, 140, 0.5);
         padding: 0.58rem 1.05rem;
-        background: rgba(7, 7, 12, 0.72);
+        background: rgba(255, 255, 255, 0.82);
         color: var(--gold);
         font-size: 0.68rem;
         font-weight: 500;
@@ -584,7 +584,7 @@
       }
 
       .plyr__control--overlaid {
-        background: rgba(200, 145, 58, 0.9) !important;
+        background: rgba(254, 94, 86, 0.92) !important;
       }
 
       .plyr__control--overlaid:hover {
@@ -633,7 +633,7 @@
       .about-art-box img {
         width: min(230px, 55%);
         opacity: 0.9;
-        filter: drop-shadow(0 0 28px rgba(200, 145, 58, 0.16));
+        filter: drop-shadow(0 0 28px rgba(3, 101, 140, 0.16));
       }
 
       .about-art-tagline {
@@ -707,6 +707,13 @@
         align-items: center;
         gap: 0.5rem;
         padding: 0.6rem 1.25rem;
+      }
+
+      .stream-btn svg {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+        flex-shrink: 0;
       }
 
       .stream-btn:hover {
@@ -1028,9 +1035,18 @@
               در این کانال شعرهای ماندگار فارسی با موسیقی و طراحی مدرن دوباره جان می‌گیرد.
             </p>
             <div class="stream-row">
-              <a class="stream-btn" href="https://www.youtube.com/channel/UC9y5EgYitKP_jpnVrRjPzfQ?sub_confirmation=1" target="_blank" rel="noopener">Subscribe</a>
-              <a class="stream-btn" href="https://open.spotify.com/artist/5ADIRg41dKLk2dIgGa4M4T?si=Tv47AiipQWqyiGSfQoTdEg" target="_blank" rel="noopener">Spotify</a>
-              <a class="stream-btn" href="https://music.apple.com/us/artist/farsi-lyrics/1878625621" target="_blank" rel="noopener">Apple Music</a>
+              <a class="stream-btn" href="https://www.youtube.com/channel/UC9y5EgYitKP_jpnVrRjPzfQ?sub_confirmation=1" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg>
+                Subscribe
+              </a>
+              <a class="stream-btn" href="https://open.spotify.com/artist/5ADIRg41dKLk2dIgGa4M4T?si=Tv47AiipQWqyiGSfQoTdEg" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24Zm5.5 17.3a.9.9 0 0 1-1.2.3c-3.3-2-7.5-2.4-12.4-1.3a.9.9 0 1 1-.4-1.7c5.4-1.2 10-.7 13.7 1.5.4.3.6.8.3 1.2Zm1.5-3.3a1 1 0 0 1-1.4.4c-3.8-2.3-9.5-3-14-1.6a1 1 0 1 1-.6-2c5.2-1.6 11.5-.8 15.7 1.8.5.3.7.9.3 1.4Zm.1-3.5C14.7 7.8 7.2 7.6 3 8.9a1.2 1.2 0 1 1-.7-2.3c4.9-1.5 13.1-1.3 18.1 1.7a1.2 1.2 0 0 1-1.3 2.2Z"/></svg>
+                Spotify
+              </a>
+              <a class="stream-btn" href="https://music.apple.com/us/artist/farsi-lyrics/1878625621" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.7 2.2c-.8.1-8.4 1.7-9.3 1.9-.6.1-.8.4-.8 1v11.4c0 .9-.3 1.3-1.1 1.5l-1.1.2c-1.6.3-2.7 1.4-2.5 2.7.2 1.2 1.5 1.9 3.1 1.6 1.7-.3 3-1.5 3-2.9V8.2l8.3-1.7v8.2c0 .9-.3 1.3-1.1 1.5l-1.1.2c-1.6.3-2.7 1.4-2.5 2.7.2 1.2 1.5 1.9 3.1 1.6 1.7-.3 3-1.5 3-2.9V3c0-.6-.3-.9-1-.8Z"/></svg>
+                Apple Music
+              </a>
             </div>
           </div>
         </div>
@@ -1320,12 +1336,12 @@
         element.addEventListener("mouseenter", () => {
           ring.style.width = "50px";
           ring.style.height = "50px";
-          ring.style.borderColor = "rgba(200,145,58,.65)";
+          ring.style.borderColor = "rgba(254,94,86,.65)";
         });
         element.addEventListener("mouseleave", () => {
           ring.style.width = "30px";
           ring.style.height = "30px";
-          ring.style.borderColor = "rgba(200,145,58,.35)";
+          ring.style.borderColor = "rgba(3,101,140,.35)";
         });
       });
 
