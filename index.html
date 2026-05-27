@@ -178,7 +178,7 @@
 
       .nav-links a {
         color: var(--muted);
-        font-size: 0.68rem;
+        font-size: 0.76rem;
         font-weight: 500;
         letter-spacing: 0.2em;
         text-decoration: none;
@@ -249,7 +249,7 @@
       .section-tag {
         display: block;
         color: var(--gold);
-        font-size: 0.62rem;
+        font-size: 0.74rem;
         font-weight: 500;
         letter-spacing: 0.38em;
         text-transform: uppercase;
@@ -288,7 +288,7 @@
       .hero-sub-en {
         margin-top: 0.5rem;
         color: var(--muted);
-        font-size: 0.68rem;
+        font-size: 0.78rem;
         font-weight: 400;
         letter-spacing: 0.22em;
         text-transform: uppercase;
@@ -304,7 +304,7 @@
         padding: 0.8rem 2.2rem;
         color: var(--gold);
         background: transparent;
-        font-size: 0.68rem;
+        font-size: 0.76rem;
         font-weight: 500;
         letter-spacing: 0.22em;
         text-decoration: none;
@@ -333,7 +333,7 @@
 
       .scroll-indicator span {
         color: var(--muted);
-        font-size: 0.58rem;
+        font-size: 0.66rem;
         letter-spacing: 0.28em;
         text-transform: uppercase;
       }
@@ -393,7 +393,7 @@
 
       .stat-label {
         color: var(--muted);
-        font-size: 0.56rem;
+        font-size: 0.68rem;
         font-weight: 500;
         letter-spacing: 0.18em;
         text-transform: uppercase;
@@ -458,7 +458,7 @@
         margin-bottom: 0.25rem;
         color: var(--gold-dim);
         font-family: var(--display);
-        font-size: 0.68rem;
+        font-size: 0.78rem;
         letter-spacing: 0.08em;
       }
 
@@ -466,14 +466,14 @@
         color: var(--text);
         direction: rtl;
         font-family: var(--persian);
-        font-size: 1rem;
+        font-size: 1.08rem;
         font-weight: 400;
       }
 
       .video-title-en {
         margin-top: 0.35rem;
         color: var(--muted-2);
-        font-size: 0.72rem;
+        font-size: 0.82rem;
         font-weight: 400;
       }
 
@@ -481,7 +481,7 @@
         border: 1px solid var(--border);
         padding: 0.2rem 0.6rem;
         color: var(--muted);
-        font-size: 0.55rem;
+        font-size: 0.66rem;
         font-weight: 500;
         letter-spacing: 0.18em;
         text-transform: uppercase;
@@ -495,7 +495,7 @@
         gap: 0.6rem;
         margin-top: 0.8rem;
         color: var(--muted);
-        font-size: 0.66rem;
+        font-size: 0.76rem;
         letter-spacing: 0.1em;
         text-transform: uppercase;
       }
@@ -503,7 +503,7 @@
       .watch-link {
         grid-column: 1 / -1;
         color: var(--gold);
-        font-size: 0.66rem;
+        font-size: 0.76rem;
         font-weight: 500;
         letter-spacing: 0.16em;
         text-decoration: none;
@@ -577,7 +577,7 @@
         color: var(--muted-2);
         direction: rtl;
         font-family: var(--persian);
-        font-size: 0.95rem;
+        font-size: 1.04rem;
         font-weight: 300;
         line-height: 2;
         text-align: center;
@@ -597,7 +597,7 @@
       .about-text p {
         margin-bottom: 1.3rem;
         color: var(--muted-2);
-        font-size: 0.95rem;
+        font-size: 1.04rem;
         line-height: 1.95;
       }
 
@@ -613,7 +613,7 @@
         color: var(--text);
         direction: rtl;
         font-family: var(--persian);
-        font-size: 1.1rem;
+        font-size: 1.18rem;
         font-weight: 300;
         line-height: 2;
       }
@@ -630,7 +630,7 @@
         border: 1px solid var(--border);
         color: var(--text);
         background: var(--surface);
-        font-size: 0.66rem;
+        font-size: 0.76rem;
         font-weight: 500;
         letter-spacing: 0.14em;
         text-decoration: none;
@@ -698,8 +698,18 @@
       }
 
       .si-icon {
-        width: 18px;
+        width: 22px;
+        height: 22px;
         color: var(--gold-dim);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .si-icon svg {
+        width: 100%;
+        height: 100%;
+        fill: currentColor;
       }
 
       .si-label {
@@ -722,7 +732,7 @@
 
       footer p {
         color: var(--muted);
-        font-size: 0.62rem;
+        font-size: 0.72rem;
         letter-spacing: 0.1em;
       }
 
@@ -837,7 +847,7 @@
 
       @media (max-width: 520px) {
         .nav-links a {
-          font-size: 0.58rem;
+          font-size: 0.68rem;
           letter-spacing: 0.13em;
         }
 
@@ -965,19 +975,19 @@
           </div>
           <div class="social-list reveal">
             <a class="social-item" href="https://www.youtube.com/channel/UC9y5EgYitKP_jpnVrRjPzfQ" target="_blank" rel="noopener">
-              <span class="si-icon">▶</span><span class="si-label">YouTube</span><span class="si-arr">↗</span>
+              <span class="si-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></svg></span><span class="si-label">YouTube</span><span class="si-arr">↗</span>
             </a>
             <a class="social-item" href="https://open.spotify.com/artist/5ADIRg41dKLk2dIgGa4M4T?si=Tv47AiipQWqyiGSfQoTdEg" target="_blank" rel="noopener">
-              <span class="si-icon">♪</span><span class="si-label">Spotify</span><span class="si-arr">↗</span>
+              <span class="si-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24Zm5.5 17.3a.9.9 0 0 1-1.2.3c-3.3-2-7.5-2.4-12.4-1.3a.9.9 0 1 1-.4-1.7c5.4-1.2 10-.7 13.7 1.5.4.3.6.8.3 1.2Zm1.5-3.3a1 1 0 0 1-1.4.4c-3.8-2.3-9.5-3-14-1.6a1 1 0 1 1-.6-2c5.2-1.6 11.5-.8 15.7 1.8.5.3.7.9.3 1.4Zm.1-3.5C14.7 7.8 7.2 7.6 3 8.9a1.2 1.2 0 1 1-.7-2.3c4.9-1.5 13.1-1.3 18.1 1.7a1.2 1.2 0 0 1-1.3 2.2Z"/></svg></span><span class="si-label">Spotify</span><span class="si-arr">↗</span>
             </a>
             <a class="social-item" href="https://music.apple.com/us/artist/farsi-lyrics/1878625621" target="_blank" rel="noopener">
-              <span class="si-icon">♬</span><span class="si-label">Apple Music</span><span class="si-arr">↗</span>
+              <span class="si-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18.7 2.2c-.8.1-8.4 1.7-9.3 1.9-.6.1-.8.4-.8 1v11.4c0 .9-.3 1.3-1.1 1.5l-1.1.2c-1.6.3-2.7 1.4-2.5 2.7.2 1.2 1.5 1.9 3.1 1.6 1.7-.3 3-1.5 3-2.9V8.2l8.3-1.7v8.2c0 .9-.3 1.3-1.1 1.5l-1.1.2c-1.6.3-2.7 1.4-2.5 2.7.2 1.2 1.5 1.9 3.1 1.6 1.7-.3 3-1.5 3-2.9V3c0-.6-.3-.9-1-.8Z"/></svg></span><span class="si-label">Apple Music</span><span class="si-arr">↗</span>
             </a>
             <a class="social-item" href="https://www.instagram.com/farsi_lyrics5?igsh=MWg5M3F1NmdtdjYy&utm_source=qr" target="_blank" rel="noopener">
-              <span class="si-icon">◎</span><span class="si-label">Instagram</span><span class="si-arr">↗</span>
+              <span class="si-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.8a4.2 4.2 0 1 1 0 8.4 4.2 4.2 0 0 1 0-8.4Zm0 2a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4Zm4.7-2.9a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg></span><span class="si-label">Instagram</span><span class="si-arr">↗</span>
             </a>
             <a class="social-item" href="https://www.tiktok.com/@farsi.lyrics?_r=1&_t=ZN-91ETTeS5WkQ" target="_blank" rel="noopener">
-              <span class="si-icon">♫</span><span class="si-label">TikTok</span><span class="si-arr">↗</span>
+              <span class="si-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16.3 2c.4 3.1 2.1 4.9 5.1 5.1v3.4a8.8 8.8 0 0 1-5.1-1.6v6.6c0 4.1-2.8 6.5-6.4 6.5-3.3 0-6.1-2.2-6.1-5.7 0-3.8 3.2-6 6.9-5.5v3.6c-1.6-.5-3.3.3-3.3 1.9 0 1.3 1.1 2.1 2.4 2.1 1.6 0 2.6-1 2.6-3V2h3.9Z"/></svg></span><span class="si-label">TikTok</span><span class="si-arr">↗</span>
             </a>
           </div>
         </div>
