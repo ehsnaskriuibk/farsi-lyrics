@@ -1,0 +1,1351 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Farsi Lyrics</title>
+    <meta
+      name="description"
+      content="Farsi Lyrics creates Persian deep house, techno house, lyric videos, and AI-assisted Farsi songs."
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta property="og:title" content="Farsi Lyrics" />
+    <meta property="og:description" content="Persian deep house, lyric videos, and AI-assisted songs." />
+    <meta property="og:image" content="logo.png" />
+    <link rel="icon" href="logo.png" />
+
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;700&family=Vazirmatn:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #07070c;
+        --surface: #0e0e16;
+        --surface-2: #13131d;
+        --border: #1a1a28;
+        --gold: #c8913a;
+        --gold-dim: #6e4f1f;
+        --gold-glow: rgba(200, 145, 58, 0.1);
+        --blue: #4896c8;
+        --text: #ece8e1;
+        --muted: #5e5e72;
+        --muted-2: #8a8a9a;
+        --display: "Playfair Display", Georgia, serif;
+        --body: "DM Sans", Arial, sans-serif;
+        --persian: "Vazirmatn", Tahoma, sans-serif;
+        --plyr-color-main: #c8913a;
+        --plyr-video-background: #0e0e16;
+        --plyr-font-family: "DM Sans", sans-serif;
+        --plyr-control-radius: 2px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--body);
+        font-weight: 300;
+        overflow-x: hidden;
+        cursor: none;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 900;
+        pointer-events: none;
+        opacity: 0.22;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      :lang(fa),
+      .fa {
+        font-family: var(--persian);
+      }
+
+      .cursor,
+      .cursor-ring {
+        position: fixed;
+        pointer-events: none;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .cursor {
+        width: 7px;
+        height: 7px;
+        z-index: 9999;
+        background: var(--gold);
+        transition: transform 0.15s;
+      }
+
+      .cursor-ring {
+        width: 30px;
+        height: 30px;
+        z-index: 9998;
+        border: 1px solid rgba(200, 145, 58, 0.35);
+        transition: width 0.3s, height 0.3s, border-color 0.3s;
+      }
+
+      @media (hover: none) {
+        body {
+          cursor: auto;
+        }
+
+        .cursor,
+        .cursor-ring {
+          display: none;
+        }
+      }
+
+      nav#nav {
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 70px;
+        padding: 0 3.5rem;
+        transition: background 0.4s, border-color 0.4s;
+      }
+
+      nav#nav.scrolled {
+        background: rgba(7, 7, 12, 0.9);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(16px);
+      }
+
+      .nav-logo,
+      .footer-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        text-decoration: none;
+      }
+
+      .nav-logo img {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+      }
+
+      .nav-logo-text,
+      .footer-brand span {
+        color: var(--text);
+        font-family: var(--display);
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      .nav-logo-text em,
+      .footer-brand span em {
+        color: var(--gold);
+        font-style: italic;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--muted);
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: color 0.25s;
+      }
+
+      .nav-links a:hover {
+        color: var(--gold);
+      }
+
+      #hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 6rem 2rem 4rem;
+        text-align: center;
+      }
+
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(110px);
+        opacity: 0.14;
+        animation: drift 20s ease-in-out infinite alternate;
+      }
+
+      .orb-1 {
+        width: 700px;
+        height: 700px;
+        top: -200px;
+        left: -200px;
+        background: radial-gradient(circle, #c8913a, transparent 65%);
+      }
+
+      .orb-2 {
+        width: 550px;
+        height: 550px;
+        right: -100px;
+        bottom: -100px;
+        background: radial-gradient(circle, #4896c8, transparent 65%);
+        animation-delay: -8s;
+      }
+
+      .orb-3 {
+        width: 400px;
+        height: 400px;
+        top: 35%;
+        left: 52%;
+        opacity: 0.09;
+        background: radial-gradient(circle, #7a3278, transparent 65%);
+        animation-delay: -16s;
+      }
+
+      .hero-logo {
+        width: 96px;
+        height: 96px;
+        object-fit: contain;
+        margin: 0 auto 1.8rem;
+        filter: drop-shadow(0 0 24px rgba(200, 145, 58, 0.25));
+        animation: fadeUp 1s ease 0.1s both;
+      }
+
+      .hero-eyebrow,
+      .section-tag {
+        display: block;
+        color: var(--gold);
+        font-size: 0.62rem;
+        font-weight: 500;
+        letter-spacing: 0.38em;
+        text-transform: uppercase;
+      }
+
+      .hero-eyebrow {
+        margin-bottom: 1.4rem;
+        animation: fadeUp 1s ease 0.3s both;
+      }
+
+      .hero-title {
+        color: var(--text);
+        font-family: var(--display);
+        font-size: clamp(4rem, 11vw, 9.5rem);
+        font-weight: 400;
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        animation: fadeUp 1s ease 0.5s both;
+      }
+
+      .hero-title em {
+        color: var(--gold);
+        font-style: italic;
+      }
+
+      .hero-subtitle-fa {
+        margin-top: 1.2rem;
+        color: var(--muted-2);
+        direction: rtl;
+        font-family: var(--persian);
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+        line-height: 2;
+        animation: fadeUp 1s ease 0.7s both;
+      }
+
+      .hero-sub-en {
+        margin-top: 0.5rem;
+        color: var(--muted);
+        font-size: 0.68rem;
+        font-weight: 400;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        animation: fadeUp 1s ease 0.8s both;
+      }
+
+      .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        margin-top: 2.8rem;
+        border: 1px solid var(--gold-dim);
+        padding: 0.8rem 2.2rem;
+        color: var(--gold);
+        background: transparent;
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.22em;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: background 0.3s, border-color 0.3s, color 0.3s;
+        animation: fadeUp 1s ease 0.95s both;
+      }
+
+      .hero-cta:hover {
+        border-color: var(--gold);
+        background: var(--gold);
+        color: var(--bg);
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 2.5rem;
+        left: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        transform: translateX(-50%);
+        animation: fadeIn 1.5s ease 1.5s both;
+      }
+
+      .scroll-indicator span {
+        color: var(--muted);
+        font-size: 0.58rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+      }
+
+      .scroll-line {
+        width: 1px;
+        height: 44px;
+        background: linear-gradient(to bottom, var(--gold-dim), transparent);
+        animation: pulse 2.2s ease infinite;
+      }
+
+      .wrapper {
+        max-width: 1340px;
+        margin: 0 auto;
+        padding: 0 4rem;
+      }
+
+      .section-gap {
+        padding: 7rem 0;
+      }
+
+      .section-tag {
+        margin-bottom: 0.9rem;
+      }
+
+      .section-heading {
+        margin-bottom: 3rem;
+        color: var(--text);
+        font-family: var(--display);
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        font-weight: 400;
+        line-height: 1.05;
+      }
+
+      .section-heading em {
+        color: var(--gold);
+        font-style: italic;
+      }
+
+      .hr {
+        height: 1px;
+        background: linear-gradient(to right, transparent, var(--border), transparent);
+      }
+
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 3px;
+        margin-bottom: 4rem;
+      }
+
+      .stat-card {
+        border: 1px solid var(--border);
+        background: var(--surface);
+        padding: 1.2rem 1.4rem;
+      }
+
+      .stat-label {
+        color: var(--muted);
+        font-size: 0.56rem;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .stat-value {
+        margin-top: 0.35rem;
+        color: var(--text);
+        font-family: var(--display);
+        font-size: 1.45rem;
+      }
+
+      .video-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 3px;
+      }
+
+      .video-card {
+        position: relative;
+        overflow: hidden;
+        background: var(--surface);
+        transition: transform 0.3s ease;
+      }
+
+      .video-card:hover {
+        transform: translateY(-2px);
+      }
+
+      .video-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        border: 1px solid transparent;
+        pointer-events: none;
+        transition: border-color 0.3s;
+      }
+
+      .video-card:hover::before,
+      .video-card.is-latest::before {
+        border-color: var(--gold-dim);
+      }
+
+      .video-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: #050508;
+      }
+
+      .video-poster {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        padding: 0;
+        overflow: hidden;
+        cursor: none;
+        background: #050508;
+        color: var(--text);
+        font: inherit;
+      }
+
+      .video-poster img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(0.88) contrast(1.05) brightness(0.72);
+        transition: transform 0.5s ease, filter 0.5s ease;
+      }
+
+      .video-poster::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 50% 45%, rgba(200, 145, 58, 0.18), transparent 28%),
+          linear-gradient(180deg, rgba(7, 7, 12, 0.08), rgba(7, 7, 12, 0.72));
+      }
+
+      .video-poster span {
+        position: absolute;
+        left: 50%;
+        bottom: 1.35rem;
+        z-index: 1;
+        transform: translateX(-50%);
+        border: 1px solid rgba(200, 145, 58, 0.55);
+        padding: 0.58rem 1.05rem;
+        background: rgba(7, 7, 12, 0.72);
+        color: var(--gold);
+        font-size: 0.58rem;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        backdrop-filter: blur(12px);
+      }
+
+      .video-poster:hover img {
+        transform: scale(1.04);
+        filter: saturate(0.95) contrast(1.08) brightness(0.86);
+      }
+
+      .video-meta {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0.8rem;
+        align-items: start;
+        border-top: 1px solid var(--border);
+        padding: 1.1rem 1.4rem 1.4rem;
+      }
+
+      .video-num {
+        margin-bottom: 0.25rem;
+        color: var(--gold-dim);
+        font-family: var(--display);
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+      }
+
+      .video-title-fa {
+        color: var(--text);
+        direction: rtl;
+        font-family: var(--persian);
+        font-size: 1rem;
+        font-weight: 400;
+      }
+
+      .video-title-en {
+        margin-top: 0.35rem;
+        color: var(--muted-2);
+        font-size: 0.72rem;
+        font-weight: 400;
+      }
+
+      .video-pill {
+        border: 1px solid var(--border);
+        padding: 0.2rem 0.6rem;
+        color: var(--muted);
+        font-size: 0.55rem;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .video-stats {
+        grid-column: 1 / -1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 0.8rem;
+        color: var(--muted);
+        font-size: 0.66rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .watch-link {
+        grid-column: 1 / -1;
+        color: var(--gold);
+        font-size: 0.66rem;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .watch-link:hover {
+        color: var(--text);
+      }
+
+      .plyr--video {
+        height: 100%;
+        border-radius: 0;
+      }
+
+      .plyr__control--overlaid {
+        background: rgba(200, 145, 58, 0.9) !important;
+      }
+
+      .plyr__control--overlaid:hover {
+        background: var(--gold) !important;
+        transform: translate(-50%, -50%) scale(1.08) !important;
+      }
+
+      .plyr--full-ui input[type="range"] {
+        color: var(--gold);
+      }
+
+      .plyr__menu__container {
+        border: 1px solid var(--border);
+        background: var(--surface);
+      }
+
+      .plyr__menu__container label {
+        color: var(--text);
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.15fr;
+        gap: 6rem;
+        align-items: center;
+      }
+
+      .about-art {
+        position: relative;
+        aspect-ratio: 3 / 4;
+        max-height: 500px;
+      }
+
+      .about-art-box {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1.5rem;
+        border: 1px solid var(--border);
+        background: var(--surface);
+      }
+
+      .about-art-box img {
+        width: min(230px, 55%);
+        opacity: 0.9;
+        filter: drop-shadow(0 0 28px rgba(200, 145, 58, 0.16));
+      }
+
+      .about-art-tagline {
+        padding: 0 2rem;
+        color: var(--muted-2);
+        direction: rtl;
+        font-family: var(--persian);
+        font-size: 0.95rem;
+        font-weight: 300;
+        line-height: 2;
+        text-align: center;
+      }
+
+      .about-art-accent {
+        position: absolute;
+        right: -1.5rem;
+        bottom: -1.5rem;
+        width: 55%;
+        height: 55%;
+        border: 1px solid var(--gold-dim);
+        opacity: 0.3;
+        pointer-events: none;
+      }
+
+      .about-text p {
+        margin-bottom: 1.3rem;
+        color: var(--muted-2);
+        font-size: 0.95rem;
+        line-height: 1.95;
+      }
+
+      .about-text p strong {
+        color: var(--text);
+        font-weight: 400;
+      }
+
+      .about-quote {
+        margin: 2.2rem 0;
+        border-right: 2px solid var(--gold);
+        padding-right: 1.3rem;
+        color: var(--text);
+        direction: rtl;
+        font-family: var(--persian);
+        font-size: 1.1rem;
+        font-weight: 300;
+        line-height: 2;
+      }
+
+      .stream-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 2rem;
+      }
+
+      .stream-btn,
+      .social-item {
+        border: 1px solid var(--border);
+        color: var(--text);
+        background: var(--surface);
+        font-size: 0.66rem;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: border-color 0.25s, color 0.25s, background 0.25s, transform 0.25s;
+      }
+
+      .stream-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.25rem;
+      }
+
+      .stream-btn:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+        background: var(--gold-glow);
+      }
+
+      #contact {
+        padding: 6rem 0 5rem;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+        align-items: start;
+      }
+
+      .contact-heading {
+        margin-top: 0.5rem;
+        color: var(--text);
+        font-family: var(--display);
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 400;
+        line-height: 1.15;
+      }
+
+      .contact-heading em {
+        color: var(--gold);
+        font-style: italic;
+      }
+
+      .social-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .social-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.85rem 1.2rem;
+        color: var(--muted-2);
+        letter-spacing: 0.16em;
+      }
+
+      .social-item:hover {
+        border-color: var(--gold-dim);
+        color: var(--text);
+        transform: translateX(5px);
+      }
+
+      .si-icon {
+        width: 18px;
+        color: var(--gold-dim);
+      }
+
+      .si-label {
+        flex: 1;
+      }
+
+      .si-arr {
+        opacity: 0.4;
+      }
+
+      footer {
+        max-width: 1340px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 auto;
+        border-top: 1px solid var(--border);
+        padding: 1.8rem 4rem;
+      }
+
+      footer p {
+        color: var(--muted);
+        font-size: 0.62rem;
+        letter-spacing: 0.1em;
+      }
+
+      .footer-brand img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+        opacity: 0.7;
+      }
+
+      .footer-brand span {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes drift {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(50px, -40px) scale(1.07);
+        }
+        100% {
+          transform: translate(-30px, 50px) scale(0.95);
+        }
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(26px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.35;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 1100px) {
+        .video-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 860px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .wrapper {
+          padding: 0 1.5rem;
+        }
+
+        nav#nav {
+          padding: 0 1.5rem;
+        }
+
+        .nav-links {
+          gap: 1.3rem;
+        }
+
+        .stats-row,
+        .video-grid,
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .section-gap {
+          padding: 5rem 0;
+        }
+
+        footer {
+          flex-direction: column;
+          gap: 1rem;
+          padding: 1.5rem;
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .nav-links a {
+          font-size: 0.58rem;
+          letter-spacing: 0.13em;
+        }
+
+        .hero-title {
+          font-size: clamp(3.8rem, 20vw, 5.8rem);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="ring"></div>
+
+    <nav id="nav">
+      <a href="#hero" class="nav-logo">
+        <img src="logo.png" alt="Farsi Lyrics logo" />
+        <span class="nav-logo-text">Farsi <em>Lyrics</em></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#videos">Music</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Links</a></li>
+      </ul>
+    </nav>
+
+    <section id="hero">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+
+      <div>
+        <img class="hero-logo" src="logo.png" alt="Farsi Lyrics logo" />
+        <span class="hero-eyebrow">Persian Deep House / AI Music / Lyric Videos</span>
+        <h1 class="hero-title">Farsi <em>Lyrics</em></h1>
+        <p class="hero-subtitle-fa" lang="fa" dir="rtl">
+          شعرهای ماندگار فارسی، با صدای امروزی و حال‌وهوای شبانه
+        </p>
+        <p class="hero-sub-en">Channel data fetched from YouTube RSS / May 27, 2026</p>
+        <a class="hero-cta" href="#videos">Listen Now <span>↓</span></a>
+      </div>
+
+      <div class="scroll-indicator" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <div class="hr"></div>
+
+    <main>
+      <section id="videos" class="section-gap">
+        <div class="wrapper">
+          <span class="section-tag reveal">Latest from the channel</span>
+          <h2 class="section-heading reveal">Music <em>videos</em></h2>
+
+          <div class="stats-row reveal">
+            <div class="stat-card">
+              <div class="stat-label">Channel</div>
+              <div class="stat-value">Farsi Lyrics</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Created</div>
+              <div class="stat-value">Nov 5, 2025</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Latest Upload</div>
+              <div class="stat-value">May 26, 2026</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Feed Items</div>
+              <div class="stat-value">15</div>
+            </div>
+          </div>
+
+          <div class="video-grid" id="videoGrid"></div>
+        </div>
+      </section>
+
+      <div class="hr"></div>
+
+      <section id="about" class="section-gap">
+        <div class="wrapper about-grid">
+          <div class="about-art reveal">
+            <div class="about-art-box">
+              <img src="logo.png" alt="" />
+              <p class="about-art-tagline" lang="fa" dir="rtl">
+                موسیقی برای لحظه‌های بعد از نیمه‌شب
+              </p>
+            </div>
+            <div class="about-art-accent"></div>
+          </div>
+
+          <div class="about-text reveal">
+            <span class="section-tag">About the channel</span>
+            <h2 class="section-heading">Deep house with <em>Persian memory</em></h2>
+            <p>
+              <strong>Farsi Lyrics</strong> turns Persian poetry and lyric storytelling into
+              modern electronic songs, blending emotional vocals, atmospheric textures, and
+              deep house rhythm.
+            </p>
+            <p>
+              The channel focuses on songs for rainy nights, long drives, and quiet moments:
+              romantic, nostalgic, cinematic, and made with a modern AI-assisted production
+              approach.
+            </p>
+            <p class="about-quote" lang="fa" dir="rtl">
+              در این کانال شعرهای ماندگار فارسی با موسیقی و طراحی مدرن دوباره جان می‌گیرد.
+            </p>
+            <div class="stream-row">
+              <a class="stream-btn" href="https://www.youtube.com/channel/UC9y5EgYitKP_jpnVrRjPzfQ?sub_confirmation=1" target="_blank" rel="noopener">Subscribe</a>
+              <a class="stream-btn" href="https://open.spotify.com/artist/5ADIRg41dKLk2dIgGa4M4T?si=Tv47AiipQWqyiGSfQoTdEg" target="_blank" rel="noopener">Spotify</a>
+              <a class="stream-btn" href="https://music.apple.com/us/artist/farsi-lyrics/1878625621" target="_blank" rel="noopener">Apple Music</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="hr"></div>
+
+      <section id="contact">
+        <div class="wrapper contact-grid">
+          <div class="reveal">
+            <span class="section-tag">Connect</span>
+            <h2 class="contact-heading">Follow the next <em>release</em>.</h2>
+          </div>
+          <div class="social-list reveal">
+            <a class="social-item" href="https://www.youtube.com/channel/UC9y5EgYitKP_jpnVrRjPzfQ" target="_blank" rel="noopener">
+              <span class="si-icon">▶</span><span class="si-label">YouTube</span><span class="si-arr">↗</span>
+            </a>
+            <a class="social-item" href="https://open.spotify.com/artist/5ADIRg41dKLk2dIgGa4M4T?si=Tv47AiipQWqyiGSfQoTdEg" target="_blank" rel="noopener">
+              <span class="si-icon">♪</span><span class="si-label">Spotify</span><span class="si-arr">↗</span>
+            </a>
+            <a class="social-item" href="https://music.apple.com/us/artist/farsi-lyrics/1878625621" target="_blank" rel="noopener">
+              <span class="si-icon">♬</span><span class="si-label">Apple Music</span><span class="si-arr">↗</span>
+            </a>
+            <a class="social-item" href="https://www.instagram.com/farsi_lyrics5?igsh=MWg5M3F1NmdtdjYy&utm_source=qr" target="_blank" rel="noopener">
+              <span class="si-icon">◎</span><span class="si-label">Instagram</span><span class="si-arr">↗</span>
+            </a>
+            <a class="social-item" href="https://www.tiktok.com/@farsi.lyrics?_r=1&_t=ZN-91ETTeS5WkQ" target="_blank" rel="noopener">
+              <span class="si-icon">♫</span><span class="si-label">TikTok</span><span class="si-arr">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 FARSI LYRICS. ALL RIGHTS RESERVED.</p>
+      <div class="footer-brand">
+        <img src="logo.png" alt="" />
+        <span>Farsi <em>Lyrics</em></span>
+      </div>
+    </footer>
+
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+    <script>
+      const channelVideos = [
+        {
+          id: "0rmnJHrdCv8",
+          title: "Farsi Lyrics - Baroon Imshab - Persian Deep House",
+          fa: "بارونِ امشب",
+          label: "Latest",
+          date: "May 26, 2026",
+          views: "17,268",
+          likes: "327",
+          type: "Persian Deep House",
+          url: "https://www.youtube.com/watch?v=0rmnJHrdCv8",
+        },
+        {
+          id: "Fi38eMCDj0A",
+          title: "Farsi Lyrics - Shabgardi - Persian Deep House",
+          fa: "شبگردی",
+          label: "Track",
+          date: "May 22, 2026",
+          views: "156,279",
+          likes: "934",
+          type: "Persian Deep House",
+          url: "https://www.youtube.com/watch?v=Fi38eMCDj0A",
+        },
+        {
+          id: "83LB91EDy8M",
+          title: "Farsi Lyrics - Avaz Shodi - Persian Deep House",
+          fa: "عوض شدی",
+          label: "Track",
+          date: "May 19, 2026",
+          views: "130,701",
+          likes: "615",
+          type: "Persian Deep House",
+          url: "https://www.youtube.com/watch?v=83LB91EDy8M",
+        },
+        {
+          id: "y1Kx-DFwamk",
+          title: "Farsi Lyrics - Dame Raftan - Persian Deep House",
+          fa: "دمِ رفتن",
+          label: "Track",
+          date: "May 15, 2026",
+          views: "906,150",
+          likes: "3,377",
+          type: "Persian Deep House",
+          url: "https://www.youtube.com/watch?v=y1Kx-DFwamk",
+        },
+        {
+          id: "0MIO5Jf3xLU",
+          title: "Farsi Lyrics - Zabanam Lal",
+          fa: "زبانم لال",
+          label: "Track",
+          date: "May 12, 2026",
+          views: "33,855",
+          likes: "223",
+          type: "Persian Music",
+          url: "https://www.youtube.com/watch?v=0MIO5Jf3xLU",
+        },
+        {
+          id: "v_5BY82bfMo",
+          title: "Farsi Lyrics - Ey Yaram - Persian Techno House",
+          fa: "ای یارم",
+          label: "Track",
+          date: "May 8, 2026",
+          views: "13,196",
+          likes: "171",
+          type: "Persian Techno House",
+          url: "https://www.youtube.com/watch?v=v_5BY82bfMo",
+        },
+        {
+          id: "7tAn4N592gU",
+          title: "Farsi Lyrics - Hasrate Bade To - Persian Deep House",
+          fa: "حسرتِ بعدِ تو",
+          label: "Track",
+          date: "May 5, 2026",
+          views: "710,353",
+          likes: "3,546",
+          type: "Persian Deep House",
+          url: "https://www.youtube.com/watch?v=7tAn4N592gU",
+        },
+        {
+          id: "DINdx8h56Qw",
+          title: "Top Farsi AI Songs 2026 (Part 2)",
+          fa: "بهترین آهنگ‌های فارسی",
+          label: "Compilation",
+          date: "Apr 29, 2026",
+          views: "116,496",
+          likes: "1,146",
+          type: "Compilation",
+          url: "https://www.youtube.com/watch?v=DINdx8h56Qw",
+        },
+        {
+          id: "1Y0yuceslFQ",
+          title: "Teaser - Dele Dige",
+          fa: "تیزر آهنگ دله دیگه",
+          label: "Short",
+          date: "Apr 27, 2026",
+          views: "212",
+          likes: "7",
+          type: "YouTube Short",
+          url: "https://www.youtube.com/shorts/1Y0yuceslFQ",
+        },
+        {
+          id: "XKPHgWPhfjs",
+          title: "Farsi Lyrics - Dele Dige (Rework)",
+          fa: "دله دیگه",
+          label: "Rework",
+          date: "Apr 26, 2026",
+          views: "11,912",
+          likes: "170",
+          type: "Persian Song",
+          url: "https://www.youtube.com/watch?v=XKPHgWPhfjs",
+        },
+        {
+          id: "4XSFB6IB_C0",
+          title: "Teaser - Tahe Khoshbakhti",
+          fa: "تیزر آهنگ ته خوشبختی",
+          label: "Short",
+          date: "Apr 23, 2026",
+          views: "163",
+          likes: "3",
+          type: "YouTube Short",
+          url: "https://www.youtube.com/shorts/4XSFB6IB_C0",
+        },
+        {
+          id: "5PWyngRjYyc",
+          title: "Farsi Lyrics - Tahe Khoshbakhti",
+          fa: "تهِ خوشبختی",
+          label: "Track",
+          date: "Apr 22, 2026",
+          views: "5,531",
+          likes: "89",
+          type: "Persian Pop / EDM",
+          url: "https://www.youtube.com/watch?v=5PWyngRjYyc",
+        },
+        {
+          id: "NZIdGpXWKzA",
+          title: "Teaser - Lost in Midnight",
+          fa: "تیزر آهنگ گمشده در نیمه شب",
+          label: "Short",
+          date: "Apr 19, 2026",
+          views: "182",
+          likes: "7",
+          type: "YouTube Short",
+          url: "https://www.youtube.com/shorts/NZIdGpXWKzA",
+        },
+        {
+          id: "6oIwIkDdK08",
+          title: "Farsi Lyrics - Lost in Midnight (Rework)",
+          fa: "گمشده در نیمه شب",
+          label: "Rework",
+          date: "Apr 18, 2026",
+          views: "67,019",
+          likes: "468",
+          type: "Persian / English",
+          url: "https://www.youtube.com/watch?v=6oIwIkDdK08",
+        },
+        {
+          id: "I-UmTc6T9jE",
+          title: "Teaser - Soghati",
+          fa: "تیزر آهنگ سوغاتی",
+          label: "Short",
+          date: "Apr 16, 2026",
+          views: "259",
+          likes: "7",
+          type: "YouTube Short",
+          url: "https://www.youtube.com/shorts/I-UmTc6T9jE",
+        },
+      ];
+
+      const videoGrid = document.getElementById("videoGrid");
+      const embedOrigin = window.location.origin && window.location.origin !== "null" ? window.location.origin : "";
+      const youtubeSrc = (id) => {
+        const params = new URLSearchParams({
+          iv_load_policy: "3",
+          modestbranding: "1",
+          playsinline: "1",
+          showinfo: "0",
+          rel: "0",
+          enablejsapi: "1",
+        });
+
+        if (embedOrigin) {
+          params.set("origin", embedOrigin);
+        }
+
+        return `https://www.youtube-nocookie.com/embed/${id}?${params.toString()}`;
+      };
+
+      videoGrid.innerHTML = channelVideos
+        .map(
+          (video, index) => `
+            <article class="video-card reveal ${index === 0 ? "is-latest" : ""}">
+              <div class="video-wrapper" data-video-id="${video.id}" data-video-title="${video.title}">
+                <button class="video-poster" type="button" aria-label="Play ${video.title}">
+                  <img src="https://i.ytimg.com/vi/${video.id}/hqdefault.jpg" alt="" />
+                  <span>Play with Plyr</span>
+                </button>
+              </div>
+              <div class="video-meta">
+                <div>
+                  <div class="video-num">${String(index + 1).padStart(2, "0")}</div>
+                  <h3 class="video-title-fa" lang="fa" dir="rtl">${video.fa}</h3>
+                  <p class="video-title-en">${video.title}</p>
+                </div>
+                <span class="video-pill">${video.label}</span>
+                <div class="video-stats">
+                  <span>${video.date}</span>
+                  <span>${video.views} views</span>
+                  <span>${video.likes} likes</span>
+                  <span>${video.type}</span>
+                </div>
+                <a class="watch-link" href="${video.url}" target="_blank" rel="noopener">Watch on YouTube</a>
+              </div>
+            </article>
+          `
+        )
+        .join("");
+
+      const cursor = document.getElementById("cursor");
+      const ring = document.getElementById("ring");
+      let mx = 0;
+      let my = 0;
+      let rx = 0;
+      let ry = 0;
+
+      document.addEventListener("mousemove", (event) => {
+        mx = event.clientX;
+        my = event.clientY;
+      });
+
+      function tick() {
+        cursor.style.left = `${mx}px`;
+        cursor.style.top = `${my}px`;
+        rx += (mx - rx) * 0.11;
+        ry += (my - ry) * 0.11;
+        ring.style.left = `${rx}px`;
+        ring.style.top = `${ry}px`;
+        requestAnimationFrame(tick);
+      }
+
+      tick();
+
+      document.querySelectorAll("a, button, .plyr__control").forEach((element) => {
+        element.addEventListener("mouseenter", () => {
+          ring.style.width = "50px";
+          ring.style.height = "50px";
+          ring.style.borderColor = "rgba(200,145,58,.65)";
+        });
+        element.addEventListener("mouseleave", () => {
+          ring.style.width = "30px";
+          ring.style.height = "30px";
+          ring.style.borderColor = "rgba(200,145,58,.35)";
+        });
+      });
+
+      function mountPlyr(wrapper) {
+        const iframe = document.createElement("iframe");
+        iframe.src = youtubeSrc(wrapper.dataset.videoId);
+        iframe.title = wrapper.dataset.videoTitle;
+        iframe.allowFullscreen = true;
+        iframe.allowTransparency = true;
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        iframe.allow = "autoplay";
+
+        const embed = document.createElement("div");
+        embed.className = "plyr__video-embed js-player";
+        embed.appendChild(iframe);
+        wrapper.replaceChildren(embed);
+
+        return new Plyr(embed, {
+          controls: ["play-large", "play", "progress", "current-time", "mute", "volume", "fullscreen"],
+          ratio: "16:9",
+        });
+      }
+
+      document.querySelectorAll(".video-wrapper[data-video-id]").forEach((wrapper) => {
+        wrapper.querySelector(".video-poster").addEventListener("click", () => {
+          mountPlyr(wrapper);
+        });
+      });
+
+      const nav = document.getElementById("nav");
+      window.addEventListener("scroll", () => nav.classList.toggle("scrolled", scrollY > 60), { passive: true });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => entry.target.classList.add("in"), index * 70);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+
+      document.addEventListener("DOMContentLoaded", () => {});
+    </script>
+  </body>
+</html>
